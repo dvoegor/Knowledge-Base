@@ -34,6 +34,7 @@ app.get('/', (req, res) => {
             let numOfQ = new Array();
             let arrOfA = new Array();
             userQ = userQ.split(' ');
+            userQLength = userQ.length
             for (let i=0; i<result.length; i++) {
             let Q = result[i].question.split(' ');
             let A = result[i].answer;
@@ -72,9 +73,10 @@ app.get('/', (req, res) => {
         }
             let orey = Object.values(numOfQ);
             let max = Math.max(...orey);
+            let relevance = `${(max / userQLength) * 100}%`;
             let answerIndex = Object.values(orey).indexOf(max)
             console.log(`Ответ: ${Object.values(arrOfA)[answerIndex]}`)
-            console.log(`Найдено совпадений: ${max}`)
+            console.log(`Релевантность: ${relevance}`)
             readline.close()
           })
     })
